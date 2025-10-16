@@ -43,3 +43,17 @@ Este sistema será utilizado inicialmente para fines educativos (evaluación del
 6. Instalo las dependecias del backend:
    
       npm install express sequelize pg pg-hstore
+
+### 🔹 Etapa 2: Conexión a la base de datos (COMPLETADA ✅)
+1. Crear archivo de configuración de la base de datos:
+   
+      src/config/database.js
+2. Conectar Node.js con PostgreSQL usando Sequelize
+3. Probar la conexión con `node index.js`
+
+### 🔹 Etapa 3: Modelo de Vacuno
+1. Crear carpeta de modelos: `src/models`
+2. Crear modelo `Vacuno.js` con campos:
+   - `tipo` (madre, ternero, ternera, novillo, vaquillona, toro)
+   - `cantidad` (número de animales)
+3. Configurar Sequelize para manejar la tabla `vacunos` en PostgreSQL
