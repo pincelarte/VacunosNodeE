@@ -72,3 +72,30 @@ Este sistema será utilizado inicialmente para fines educativos (evaluación del
    - Cada `Pesaje` pertenece a un `Vacuno` (`belongsTo`)  
    - `onDelete: 'CASCADE'` para borrar automáticamente los pesajes si se borra el vacuno
 7. Sincronizar modelos con la base de datos desde `index.js`
+
+### 🔹 Etapa 4: Organización del Backend con MVC (EN PROGRESO 🚧)
+1. Crear estructura del proyecto:
+2. Preparar controlador `vacuno.controller.js`:
+- Funciones: crear, listar, actualizar y eliminar vacunos
+3. Preparar controlador `pesaje.controller.js`:
+- Funciones: registrar pesaje, listar, actualizar y eliminar pesajes por vacuno
+4. Crear rutas `vacuno.routes.js` y `pesaje.routes.js` con los endpoints CRUD:
+
+**Vacunos:**
+| Método | Ruta | Acción |
+|--------|-----|-------|
+| `GET` | `/vacunos` | Listar todos los vacunos |
+| `POST` | `/vacunos` | Crear un vacuno |
+| `PUT` | `/vacunos/:id` | Actualizar un vacuno por ID |
+| `DELETE` | `/vacunos/:id` | Eliminar un vacuno por ID |
+
+**Pesajes:**
+| Método | Ruta | Acción |
+|--------|-----|-------|
+| `GET` | `/pesajes` | Listar todos los pesajes o filtrar por vacuno |
+| `POST` | `/pesajes` | Crear un pesaje |
+| `PUT` | `/pesajes/:id` | Actualizar un pesaje por ID |
+| `DELETE` | `/pesajes/:id` | Eliminar un pesaje por ID |
+
+5. Integrar rutas en el archivo principal (`index.js`) para que la API quede funcional
+6. Probar que la API responde correctamente a todos los métodos CRUD usando Postman, Insomnia o similar
