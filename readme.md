@@ -99,3 +99,48 @@ Este sistema será utilizado inicialmente para fines educativos (evaluación del
 
 5. Integrar rutas en el archivo principal (`index.js`) para que la API quede funcional
 6. Probar que la API responde correctamente a todos los métodos CRUD usando Postman, Insomnia o similar
+
+### 🔹 Etapa 5: Pruebas de la API 
+
+#### 1️⃣ Vacunos
+<span style="color: blue;">Crear Pesaje</span>
+
+- **Crear vacuno (`POST /vacunos`)**  
+```json
+{
+  "tipo": "madre",
+  "caravana": "A123",
+  "edad": 5,
+  "pesoInicial": 450,
+  "fechaNacimiento": "2018-03-15",
+  "fechaIngreso": "2025-10-17",
+  "seguimientoVeterinario": "Vacuna aplicada",
+  "notas": "Ejemplar de alta producción"
+}
+
+_**Actualizar vacuno**
+
+{
+  "caravana": "A123B",
+  "pesoInicial": 455,
+  "notas": "Cambio de corral"
+}
+
+
+_**Crear pesaje**
+
+
+{
+  "vacunoId": 1,
+  "peso": 460,
+  "fechaPesaje": "2025-10-17"
+}
+
+_**Actualizar pesaje**
+
+{
+  "peso": 465,
+  "fechaPesaje": "2025-10-20"
+}
+
+

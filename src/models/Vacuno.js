@@ -6,8 +6,9 @@ const Vacuno = sequelize.define('Vacuno', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  nombre: {
-    type: DataTypes.STRING
+   caravana: {        
+    type: DataTypes.STRING,
+    allowNull: false
   },
   edad: {
     type: DataTypes.INTEGER
