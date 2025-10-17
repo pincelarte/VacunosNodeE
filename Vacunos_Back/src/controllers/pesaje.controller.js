@@ -2,9 +2,16 @@ const Pesaje = require('../models/Pesaje');
 const Vacuno = require('../models/Vacuno');
 
 // Crear un nuevo pesaje
-exports.crearPesaje = async (req, res) => {
+const crearPesaje = async (req, res) => {
   try {
     const { vacunoId, peso, fechaPesaje } = req.body;
+
+    if (!vacunoId || !peso || !fechaPesaje) {
+      return res.status(400).json({ message: 'vacunoId, peso y fechaPesaje son requeridos' });
+    }
+    if (isNaN(peso) || peso <= 0) {
+      return res.status(400).json({ message: 'Peso debe ser un número positivo' });
+    }
 
     // Verificar que el vacuno exista
     const vacuno = await Vacuno.findByPk(vacunoId);
@@ -21,7 +28,7 @@ exports.crearPesaje = async (req, res) => {
 };
 
 // Listar todos los pesajes
-exports.listarPesajes = async (req, res) => {
+const listarPesajes = async (req, res) => {
   try {
     const pesajes = await Pesaje.findAll({ include: Vacuno });
     res.json(pesajes);
@@ -32,10 +39,14 @@ exports.listarPesajes = async (req, res) => {
 };
 
 // Actualizar un pesaje por ID
-exports.actualizarPesaje = async (req, res) => {
+const actualizarPesaje = async (req, res) => {
   try {
     const { id } = req.params;
     const { peso, fechaPesaje } = req.body;
+
+    if (peso !== undefined && (isNaN(peso) || peso <= 0)) {
+      return res.status(400).json({ message: 'Peso debe ser un número positivo' });
+    }
 
     const pesaje = await Pesaje.findByPk(id);
     if (!pesaje) {
@@ -51,7 +62,7 @@ exports.actualizarPesaje = async (req, res) => {
 };
 
 // Eliminar un pesaje por ID
-exports.eliminarPesaje = async (req, res) => {
+const eliminarPesaje = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -66,4 +77,11 @@ exports.eliminarPesaje = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error al eliminar pesaje' });
   }
+};
+
+module.exports = {
+  crearPesaje,
+  listarPesajes,
+  actualizarPesaje,
+  eliminarPesaje
 };

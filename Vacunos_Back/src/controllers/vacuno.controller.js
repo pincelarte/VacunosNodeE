@@ -3,6 +3,10 @@ const Vacuno = require('../models/Vacuno');
 // Crear un vacuno
 const crearVacuno = async (req, res) => {
   try {
+    const { tipo, caravana } = req.body;
+    if (!tipo || !caravana) {
+      return res.status(400).json({ mensaje: 'Tipo y caravana son requeridos' });
+    }
     const vacuno = await Vacuno.create(req.body);
     res.status(201).json(vacuno);
   } catch (error) {
@@ -26,6 +30,13 @@ const listarVacunos = async (req, res) => {
 const actualizarVacuno = async (req, res) => {
   try {
     const { id } = req.params;
+    const { tipo, caravana } = req.body;
+    if (tipo && !tipo.trim()) {
+      return res.status(400).json({ mensaje: 'Tipo no puede estar vacío' });
+    }
+    if (caravana && !caravana.trim()) {
+      return res.status(400).json({ mensaje: 'Caravana no puede estar vacía' });
+    }
     const [actualizado] = await Vacuno.update(req.body, { where: { id } });
     if (actualizado) {
       const vacuno = await Vacuno.findByPk(id);

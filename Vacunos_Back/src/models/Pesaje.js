@@ -20,4 +20,7 @@ const Pesaje = sequelize.define('Pesaje', {
 Vacuno.hasMany(Pesaje, { foreignKey: 'vacunoId', onDelete: 'CASCADE' });
 Pesaje.belongsTo(Vacuno, { foreignKey: 'vacunoId' });
 
+// Relación inversa: un pesaje pertenece a un vacuno
+Vacuno.hasMany(Pesaje, { foreignKey: 'vacunoId', onDelete: 'CASCADE' });
+
 module.exports = Pesaje;
