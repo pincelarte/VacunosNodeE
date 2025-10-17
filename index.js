@@ -1,15 +1,27 @@
-// Se importa la conexión que creada en config/database.js 
+require('dotenv').config(); // ✅ Cargar variables del .env
+const express = require('express');
+const sequelize = require('./src/config/database'); // ✅ conexión a la DB
 
-const sequelize = require('./src/config/database');
+const app = express();
 
-// Función para probar la conexión a la base de datos
-async function main() {
-  try {
-    await sequelize.authenticate();
-    console.log('✅ La base de datos está conectada correctamente');
-  } catch (error) {
-    console.error('❌ Error al conectar la base de datos:', error);
-  }
-}
+// Middleware para leer JSON
+app.use(express.json());
 
-main();
+// Ruta de prueba
+app.get('/', (req, res) => {
+  res.send('✅ Servidor funcionando correctamente');
+});
+
+// Sincronizar modelos con la base de datos y luego levantar servidor
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('✅ Modelos sincronizados con la base de datos');
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor escuchando en el puerto ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('❌ Error al conectar con la base de datos:', error);
+  });

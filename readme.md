@@ -51,9 +51,24 @@ Este sistema será utilizado inicialmente para fines educativos (evaluación del
 2. Conectar Node.js con PostgreSQL usando Sequelize
 3. Probar la conexión con `node index.js`
 
-### 🔹 Etapa 3: Modelo de Vacuno
+### 🔹 Etapa 3: Modelos de Vacuno y Pesaje (COMPLETADA ✅)
 1. Crear carpeta de modelos: `src/models`
-2. Crear modelo `Vacuno.js` con campos:
-   - `tipo` (madre, ternero, ternera, novillo, vaquillona, toro)
-   - `cantidad` (número de animales)
-3. Configurar Sequelize para manejar la tabla `vacunos` en PostgreSQL
+2. Crear modelo `Vacuno.js` usando Sequelize
+3. Crear modelo `Pesaje.js` usando Sequelize
+4. Definir campos del modelo **Vacuno**:
+   - `tipo` (madre, ternero, ternera, novillo, vaquillona, toro)  
+   - `nombre` (opcional)  
+   - `edad` (opcional)  
+   - `pesoInicial` (peso al ingresar al campo)  
+   - `fechaNacimiento`  
+   - `fechaIngreso`  
+   - `seguimientoVeterinario` (texto libre)  
+   - `notas` (texto libre)  
+5. Definir campos del modelo **Pesaje**:
+   - `peso` (obligatorio)  
+   - `fechaPesaje` (obligatoria)  
+6. Configurar la relación entre modelos:
+   - Un `Vacuno` tiene muchos `Pesaje` (`hasMany`)  
+   - Cada `Pesaje` pertenece a un `Vacuno` (`belongsTo`)  
+   - `onDelete: 'CASCADE'` para borrar automáticamente los pesajes si se borra el vacuno
+7. Sincronizar modelos con la base de datos desde `index.js`

@@ -1,21 +1,25 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config(); // ✅ Cargar variables de entorno desde .env
 
-// URL de conexión que guardé en Bitwarden
-const sequelize = new Sequelize('postgresql://postgres:VKGWgBkomIfYnnIWIpXpzhSDDaxELmIC@trolley.proxy.rlwy.net:12424/railway', {
+// ✅ Ahora usamos la variable de entorno en vez de escribir la URL directamente
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
-  logging: false, // Opcional: quita los logs de SQL en consola
+  logging: false,
 });
 
-//testeo de conexión
+// Test de conexión
 async function testConnection() {
   try {
     await sequelize.authenticate();
-    console.log('Conexión exitosa a PostgreSQL');
+    console.log('✅ Conexión exitosa a PostgreSQL');
   } catch (error) {
-    console.error('No se pudo conectar a PostgreSQL:', error);
+    console.error('❌ No se pudo conectar a PostgreSQL:', error);
   }
 }
 
-testConnection();
+// ✅ Solo probamos si estamos en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  testConnection();
+}
 
 module.exports = sequelize;
